@@ -35,9 +35,6 @@ export class User {
     if (!User.validateState(props.state as STATE)) {
       throw new EntityError('props.state')
     }
-    if (props.state == undefined || props.state == null) {
-      this.props.state = STATE.PENDING
-    }
     this.props.state = props.state
 
   }

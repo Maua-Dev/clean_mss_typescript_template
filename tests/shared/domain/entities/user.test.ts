@@ -50,13 +50,20 @@ describe('[User Entity Tests]', () => {
       })
     }).toThrowError('Field props.email is not valid')
   })
-  it('Assert User Entity does not has errors with state not passed', () => {
-    const user = new User({
-      id: 0,
-      name: 'Rodrigo Diana Siqueira',
-      email: 'rodrigo.dsiqueira1@gmail.com'
-    })
-
-    expect(user.state).toBe(STATE.PENDING)
+  it('Assert User Entity has errors with state not passed', () => {
+    expect(() => {
+      new User({
+        id: 0,
+        name: 'Rodrigo Diana Siqueira',
+        email: 'rodrigo.dsiqueira1@gmail.com'
+      })
+    }).toThrowError(EntityError)
+    expect(() => {
+      new User({
+        id: 0,
+        name: 'Rodrigo Diana Siqueira',
+        email: 'rodrigo.dsqueira1@gmail.com'
+      })
+    }).toThrowError('Field props.state is not valid')
   })
 })
