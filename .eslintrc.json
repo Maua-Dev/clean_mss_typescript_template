@@ -53,6 +53,7 @@
         "semi": [
             "error",
             "never"
-        ]
+        ],
+        "no-explicit-any": "off"
     }
 }
