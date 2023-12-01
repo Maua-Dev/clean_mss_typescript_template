@@ -1,5 +1,5 @@
 import { expect, it, describe } from 'vitest'
-import { lambda_handler } from '../../../../src/modules/get_user/app/get_user_presenter'
+import { handler } from '../../../../src/modules/get_user/app/get_user_presenter'
 
 describe('Assert Get User presenter is correct at all', () => {
   it('Assert Get User presenter is correct when creating', async () => {
@@ -55,7 +55,7 @@ describe('Assert Get User presenter is correct at all', () => {
       'stageVariables': null
     }
 
-    const response = await lambda_handler(event, null)
+    const response = await handler(event, null)
 
     expect(response?.statusCode).toEqual(200)
     expect(JSON.parse(response?.body)['id']).toEqual(1)

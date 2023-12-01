@@ -17,7 +17,7 @@ export async function deleteUserPresenter(event: Record<string, any>) {
   return httpResponse.toJSON()
 }
 
-export async function lambda_handler(event: any, context: any) {
+export async function handler(event: any, context: any) {
   const response = await deleteUserPresenter(event)
   return response
 }

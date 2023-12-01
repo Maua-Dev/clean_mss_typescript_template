@@ -36,7 +36,14 @@ export class UserRepositoryDynamo implements IUserRepository {
     return Promise.resolve(userDto.toEntity())
   }
   async getAllUsers(): Promise<User[]> {
-    const resp = await this.dynamo.getAllItems()
+    const filterExpression = 'attribute_not_exists(PK) OR attribute_not_exists(SK) OR (PK <> :pk_value AND SK <> :sk_value)'
+    const expressionAttributeValues = {
+      ':pk_value': 'COUNTER',
+      ':sk_value': 'COUNTER',
+    }
+    const resp = await this.dynamo.scanItems(filterExpression, {
+      expressionAttributeValues: expressionAttributeValues
+    })
     const users = []
 
     for (const item of resp['Items']) {

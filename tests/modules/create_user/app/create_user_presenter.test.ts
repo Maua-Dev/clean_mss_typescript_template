@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { lambda_handler } from '../../../../src/modules/create_user/app/create_user_presenter'
+import { handler } from '../../../../src/modules/create_user/app/create_user_presenter'
 
 describe('Assert Create User presenter is correct at all', () => {
   it('Should activate presenter correctly', async () => {
@@ -55,7 +55,7 @@ describe('Assert Create User presenter is correct at all', () => {
       'stageVariables': null
     }
 
-    const response = await lambda_handler(event, undefined)
+    const response = await handler(event, undefined)
 
     expect(response['statusCode']).toEqual(201)
     expect(JSON.parse(response['body'])['message']).toEqual('The user was created successfully')

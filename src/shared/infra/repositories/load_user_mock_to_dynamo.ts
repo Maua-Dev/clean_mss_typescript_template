@@ -85,20 +85,26 @@ async function loadMockToLocalDynamo() {
   const mock = new UserRepositoryMock()
   const dynamoRepo = new UserRepositoryDynamo()
 
-  let count = 0
+  const count = 0
   console.log('Loading mock to local DynamoDB...')
 
   // await dynamoRepo.deleteUser(2)
 
-  const users = await mock.getAllUsers()
+  // const users = await mock.getAllUsers()
 
-  for(const user of users) {
-    console.log(`Loading user ${user.id} | ${user.name} to dynamoDB...`)
-    await dynamoRepo.createUser(user)
-    count += 1
-  }
+  // for(const user of users) {
+  //   console.log(`Loading user ${user.id} | ${user.name} to dynamoDB...`)
+  //   await dynamoRepo.createUser(user)
+  //   count += 1
+  // }
 
-  console.log('Mock loaded to local DynamoDB with success! [' + count + ' users]')
+  // const users = await dynamoRepo.getAllUsers()
+  const user = await dynamoRepo.getUser(1)
+
+  // console.log('users - [LOAD_MOCK_TO_LOCAL_DYNAMO] - ', users)
+  console.log('user - [LOAD_MOCK_TO_LOCAL_DYNAMO] - ', user)
+
+  // console.log('Mock loaded to local DynamoDB with success! [' + count + ' users]')
 }
 
 async function loadMockToRealDynamo() {

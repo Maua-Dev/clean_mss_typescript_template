@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { lambda_handler } from '../../../../src/modules/delete_user/app/delete_user_presenter'
+import { handler } from '../../../../src/modules/delete_user/app/delete_user_presenter'
 
 describe('Assert Delete User presenter is correct at all', () => {
   it('Should activate presenter correctly', async () => {
@@ -55,7 +55,7 @@ describe('Assert Delete User presenter is correct at all', () => {
       'stageVariables': null
     }
 
-    const response = await lambda_handler(event, null)
+    const response = await handler(event, null)
 
     expect(response?.statusCode).toEqual(200)
     expect(JSON.parse(response?.body)['id']).toEqual(1)

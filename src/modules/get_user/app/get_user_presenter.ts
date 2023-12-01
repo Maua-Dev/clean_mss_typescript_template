@@ -17,7 +17,7 @@ export async function getUserPresenter(event: Record<string, any>) {
   return httpResponse.toJSON()
 }
 
-export async function lambda_handler(event: any, context: any) {
+export async function handler(event: any, context: any) {
   const response = await getUserPresenter(event)
   return response
 }
