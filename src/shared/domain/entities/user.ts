@@ -2,14 +2,14 @@ import { STATE, toEnum } from '../enums/state_enum'
 import { EntityError } from '../../helpers/errors/domain_errors'
 
 export type UserProps = {
-  id?: number;
+  id: number;
   name: string;
   email: string;
   state?: STATE;
 }
 
 export type JsonProps = {
-  user_id?: number;
+  user_id: number;
   name: string;
   email: string;
   state?: string;

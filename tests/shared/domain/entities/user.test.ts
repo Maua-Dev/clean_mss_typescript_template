@@ -1,6 +1,7 @@
 import { User } from '../../../../src/shared/domain/entities/user'
 import { STATE } from '../../../../src/shared/domain/enums/state_enum'
 import { EntityError } from '../../../../src/shared/helpers/errors/domain_errors'
+import { describe, it, expect } from 'vitest'
 
 describe('[User Entity Tests]', () => {
   it('Assert User Entity is correct at all', () => {
