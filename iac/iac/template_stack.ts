@@ -26,14 +26,15 @@ export class TemplateStack extends Stack {
       }
     })
 
-    const dynamoTable = new TemplateDynamoTable(this, 'user_mss_template-table')
+    const dynamoTable = new TemplateDynamoTable(this, 'UserMssTemplateTable')
 
     const ENVIRONMENT_VARIABLES = {
-      'STAGE': 'DEV',
-      'DYNAMO_TABLE_NAME': dynamoTable.table.tableName,
+      'STAGE': process.env.STAGE,
+      'DYNAMO_TABLE_NAME': process.env.DYNAMO_TABLE_NAME,
       'DYNAMO_PARTITION_KEY': 'PK',
       'DYNAMO_SORT_KEY': 'SK',
-      'REGION': this.region
+      'REGION': process.env.REGION,
+      'ENDPOINT_URL': process.env.ENDPOINT_URL
     }
 
     const lambdaStack = new LambdaStack(this, apigatewayResource, ENVIRONMENT_VARIABLES)
