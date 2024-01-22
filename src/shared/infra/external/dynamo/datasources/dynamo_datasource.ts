@@ -63,6 +63,8 @@ export class DynamoDatasource {
       }
     }
 
+    console.log('params - [DYNAMO_DATASOURCE] - ', params)
+
     try {
       const response = await this.dynamoTable.send(new GetItemCommand(params))
       console.log('response - [DYNAMO_DATASOURCE] - ', response)
@@ -180,7 +182,7 @@ export class DynamoDatasource {
     const params: ScanInput = {
       TableName: this.dynamoTableName,
       FilterExpression: filterExpression,
-      ...options
+      ExpressionAttributeValues: options.expressionAttributeValues,
     }
 
     return await this.dynamoTable.send(new ScanCommand(params))
