@@ -5,6 +5,7 @@
     "iac": "app.ts"
   },
   "scripts": {
+    "start-local": "sam local start-api -t ./cdk.out/dev.template.json --docker-network dynamodb-local --skip-pull-image --debug",
     "build": "tsc",
     "watch": "tsc -w",
     "cdk": "cdk"
@@ -19,7 +20,7 @@
   "dependencies": {
     "aws-cdk-lib": "2.92.0",
     "constructs": "^10.0.0",
-    "dotenv": "^16.3.1",
+    "dotenv": "^16.3.2",
     "global": "^4.4.0",
     "ncp": "^2.0.0"
   }

@@ -6,8 +6,7 @@
   "author": "Rodrigo Diana Siqueira",
   "license": "MIT",
   "scripts": {
-    "start": "ts-node-dev --transpile-only --ignore-watch node_modules iac/server.ts",
-    "dev": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules iac/server.ts",
+    "load-mock": "ts-node src/shared/infra/repositories/load_user_mock_to_dynamo.ts",
     "build": "tsc -w",
     "lint": "eslint --ext .ts src",
     "lint:fix": "eslint --fix --ext .ts src",
