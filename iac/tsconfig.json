@@ -32,6 +32,10 @@
     "rootDir": "../",
     "esModuleInterop": true,
   },
+  "include": [
+    "./**/*.ts",
+    "../envs.d.ts"
+  ],
   "exclude": [
     "node_modules",
   ]
