@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { env } from '../../env'
 import { User } from '../../domain/entities/user'
 import { IUserRepository } from '../../domain/repositories/user_repository_interface'
 import { NoItemsFound } from '../../helpers/errors/usecase_errors'
@@ -7,6 +6,7 @@ import { UserDynamoDTO } from '../dto/user_dynamo_dto'
 import { DynamoDatasource } from '../external/dynamo/datasources/dynamo_datasource'
 import { EntityError } from '../../helpers/errors/domain_errors'
 import { STATE } from '../../domain/enums/state_enum'
+import { Environments } from '../../../shared/environments'
 
 export class UserRepositoryDynamo implements IUserRepository {
 
@@ -19,12 +19,13 @@ export class UserRepositoryDynamo implements IUserRepository {
   }
 
   constructor(private dynamo: DynamoDatasource = new DynamoDatasource(
-    env.DYNAMO_TABLE_NAME as string, 
-    env.DYNAMO_PARTITION_KEY as string, 
-    env.REGION as string, undefined, undefined, env.ENDPOINT_URL, env.DYNAMO_SORT_KEY
+    Environments.getEnvs().dynamoTableName, 
+    Environments.getEnvs().dynamoPartitionKey, 
+    Environments.getEnvs().region, undefined, undefined, Environments.getEnvs().endpointUrl, Environments.getEnvs().dynamoSortKey
   )) {}
 
   async getUser(id: number): Promise<User> {
+    console.log('Environments.getEnvs().dynamoTableName - [GET_USER_REPO_DYNAMO] - ', Environments.getEnvs().dynamoTableName)
     const resp = await this.dynamo.getItem(UserRepositoryDynamo.partitionKeyFormat(id), UserRepositoryDynamo.sortKeyFormat(id))
 
     if (!resp['Item']) {
@@ -36,10 +37,9 @@ export class UserRepositoryDynamo implements IUserRepository {
     return Promise.resolve(userDto.toEntity())
   }
   async getAllUsers(): Promise<User[]> {
-    const filterExpression = 'attribute_not_exists(PK) OR attribute_not_exists(SK) OR (PK <> :pk_value AND SK <> :sk_value)'
+    const filterExpression = 'attribute_not_exists(PK) OR attribute_not_exists(SK) OR (PK <> :value AND SK <> :value)'
     const expressionAttributeValues = {
-      ':pk_value': 'COUNTER',
-      ':sk_value': 'COUNTER',
+      ':value': { S: 'COUNTER' }
     }
     const resp = await this.dynamo.scanItems(filterExpression, {
       expressionAttributeValues: expressionAttributeValues
