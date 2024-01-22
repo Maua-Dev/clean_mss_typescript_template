@@ -3,7 +3,7 @@ import { DynamoDBClient } from '@aws-sdk/client-dynamodb'
 export class DynamoTable {
   private dynamoTable?: DynamoDBClient
 
-  constructor(private dynamoTableName: string, private region: string, private endpointUrl?: string) {}
+  constructor(private region: string, private endpointUrl?: string) {}
 
   async _enter_(): Promise<DynamoDBClient> {
     const s = new DynamoDBClient({
