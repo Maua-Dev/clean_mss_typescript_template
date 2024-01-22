@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { env } from '../src/shared/env'
 import * as cdk from 'aws-cdk-lib'
 import { TemplateStack } from './iac/template_stack'
 import { adjustLayerDirectory } from './adjust_layer_directory'
+import { config } from 'dotenv'
+config()
 
 console.log('Starting the CDK')
 
@@ -12,9 +13,9 @@ console.log('Finished adjusting the layer directory')
 
 const app = new cdk.App()
 
-const awsRegion = env.REGION
-const awsAccount = env.AWS_ACCOUNT_ID
-const stackName = env.STACK_NAME
+const awsRegion = process.env.REGION
+const awsAccount = process.env.AWS_ACCOUNT_ID
+const stackName = process.env.STACK_NAME
 
 let stage = ''
 
@@ -30,7 +31,7 @@ if (stackName === 'prod') {
 
 const tags = {
   'project': 'Template',
-  'stage': 'dev',
+  'stage': 'test',
   'stack': 'BACK',
   'owner': 'Digao'
 }
