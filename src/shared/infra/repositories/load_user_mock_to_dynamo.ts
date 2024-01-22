@@ -9,7 +9,7 @@ import { UserRepositoryMock } from './user_repository_mock'
 import { UserRepositoryDynamo } from './user_repository_dynamo'
 
 async function setupDynamoTable(): Promise<void> {
-  const dynamoTableName = 'user_mss_template-Table'
+  const dynamoTableName = process.env.DYNAMO_TABLE_NAME
   const endpointUrl = 'http://localhost:8000'
   // JS SDK v3 does not support global configuration.
   // Codemod has attempted to pass values to each service client in this file.
@@ -75,7 +75,7 @@ async function setupDynamoTable(): Promise<void> {
         },
       })
 
-    console.log('Table "user_mss_template-table" created!')
+    console.log(`Table ${process.env.DYNAMO_TABLE_NAME} created!`)
   } else {
     console.log('Table already exists!')
   }
@@ -85,26 +85,16 @@ async function loadMockToLocalDynamo() {
   const mock = new UserRepositoryMock()
   const dynamoRepo = new UserRepositoryDynamo()
 
-  const count = 0
+  let count = 0
   console.log('Loading mock to local DynamoDB...')
+  
+  const users = await mock.getAllUsers()
 
-  // await dynamoRepo.deleteUser(2)
-
-  // const users = await mock.getAllUsers()
-
-  // for(const user of users) {
-  //   console.log(`Loading user ${user.id} | ${user.name} to dynamoDB...`)
-  //   await dynamoRepo.createUser(user)
-  //   count += 1
-  // }
-
-  // const users = await dynamoRepo.getAllUsers()
-  const user = await dynamoRepo.getUser(1)
-
-  // console.log('users - [LOAD_MOCK_TO_LOCAL_DYNAMO] - ', users)
-  console.log('user - [LOAD_MOCK_TO_LOCAL_DYNAMO] - ', user)
-
-  // console.log('Mock loaded to local DynamoDB with success! [' + count + ' users]')
+  for(const user of users) {
+    console.log(`Loading user ${user.id} | ${user.name} to dynamoDB...`)
+    await dynamoRepo.createUser(user)
+    count += 1
+  }
 }
 
 async function loadMockToRealDynamo() {
