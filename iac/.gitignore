@@ -9,3 +9,13 @@ cdk.out
 
 # shared folder
 shared
+
+# *.db 
+*.db
+
+# yarn.lock or package-lock.json
+yarn.lock
+package-lock.json
+
+# sam build
+.aws-sam
