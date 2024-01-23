@@ -10,6 +10,52 @@ I hope you like!
 | :label: Tecnologies | Typescript, Vitest, AWS CDK, Clean Architecture, SOLID 
 | :rocket: Is this project for everyone? | If you want to learn more about clean architecture with typescript, yes!
 
+### Folder Structure 🚀⚡️
+
+```bash
+.
+├── iac
+├── src
+│   ├── modules
+│   │   ├── create_user
+│   │   │   └── app
+│   │   ├── delete_user
+│   │   │   └── app
+│   │   ├── get_user
+│   │   │   └── app
+│   │   └── update_user
+│   │       └── app
+│   └── shared
+│       ├── domain
+│       │   ├── entities
+│       │   ├── enums
+│       │   └── repositories
+│       ├── helpers
+│       │   ├── enum
+│       │   ├── errors
+│       │   ├── functions
+│       │   └── http
+│       └── infra
+│           ├── dto
+│           ├── external
+│           └── repositories
+└── tests
+    ├── modules
+    │   ├── create_user
+    │   │   └── app
+    │   ├── delete_user
+    │   │   └── app
+    │   ├── get_user
+    │   │   └── app
+    │   └── update_user
+    │       └── app
+    └── shared
+        ├── domain
+        │   └── entities
+        ├── helpers
+        └── infra
+
+```
 
 ## How can I run the project in my machine??
 
