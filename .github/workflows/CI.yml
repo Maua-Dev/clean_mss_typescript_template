@@ -21,8 +21,8 @@ jobs:
         run: yarn
       - name: Build
         run: yarn build
-      - name: Test
-        run: yarn test --coverage --watchAll=false
+      - name: Test (Vitest)
+        run: yarn test --no-watch
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v3
         env:
