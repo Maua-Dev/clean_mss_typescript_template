@@ -15,8 +15,7 @@ export class CreateUserUsecase {
     }
 
     const user = new User({id, name, email, state: STATE.PENDING})
-    this.repo.createUser(user)
+    return this.repo.createUser(user)
 
-    return user
   }
 }
