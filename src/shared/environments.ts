@@ -2,7 +2,8 @@ import { STAGE } from './domain/enums/stage_enum'
 import { IUserRepository } from './domain/repositories/user_repository_interface'
 import { UserRepositoryDynamo } from './infra/repositories/user_repository_dynamo'
 import { UserRepositoryMock } from './infra/repositories/user_repository_mock'
-
+import { config } from 'dotenv'
+config()
 export class Environments {
   stage: STAGE = STAGE.TEST
   s3BucketName: string = ''

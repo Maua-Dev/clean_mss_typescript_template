@@ -7,10 +7,13 @@ import { DynamoDBClient, waitUntilTableExists, ListTablesCommand, CreateTableCom
 import { Environments } from '../../environments'
 import { UserRepositoryMock } from './user_repository_mock'
 import { UserRepositoryDynamo } from './user_repository_dynamo'
+import { config } from 'dotenv'
+config()
 
 async function setupDynamoTable(): Promise<void> {
   const dynamoTableName = process.env.DYNAMO_TABLE_NAME
-  const endpointUrl = 'http://localhost:8000'
+  console.log('dynamoTableName - [SETUP_DYNAMO_TABLE] - ', dynamoTableName)
+  // const endpointUrl = 'http://localhost:8000'
   // JS SDK v3 does not support global configuration.
   // Codemod has attempted to pass values to each service client in this file.
   // You may need to update clients outside of this file, if they use global config.
@@ -19,10 +22,7 @@ async function setupDynamoTable(): Promise<void> {
   console.log('Setting up DynamoDB table...')
 
   const dynamoClient = new DynamoDBClient({
-    // The transformation for endpoint is not implemented.
-    // Refer to UPGRADING.md on aws-sdk-js-v3 for changes needed.
-    // Please create/upvote feature request on aws-sdk-js-codemod for endpoint.
-    endpoint: endpointUrl,
+    endpoint: process.env.ENDPOINT_URL,
     region: 'sa-east-1',
   })
   console.log('DynamoDB client created')
@@ -130,9 +130,15 @@ async function loadMockToRealDynamo() {
   
 }
 
+
 if (require.main === module) {
   (async () => {
-    await setupDynamoTable()
-    await loadMockToLocalDynamo()
+    // await setupDynamoTable()
+    await loadMockToRealDynamo()
+  })()
+} else {
+  (async () => {
+    // await setupDynamoTable()
+    await loadMockToRealDynamo()
   })()
 }
