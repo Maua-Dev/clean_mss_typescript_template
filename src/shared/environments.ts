@@ -4,6 +4,7 @@ import { UserRepositoryDynamo } from './infra/repositories/user_repository_dynam
 import { UserRepositoryMock } from './infra/repositories/user_repository_mock'
 import { config } from 'dotenv'
 config()
+
 export class Environments {
   stage: STAGE = STAGE.TEST
   s3BucketName: string = ''
