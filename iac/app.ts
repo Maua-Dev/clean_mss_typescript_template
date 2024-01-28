@@ -2,6 +2,7 @@
 import * as cdk from 'aws-cdk-lib'
 import { TemplateStack } from './iac/template_stack'
 import { adjustLayerDirectory } from './adjust_layer_directory'
+import { IacStack } from 'iac/iac_stack'
 import { config } from 'dotenv'
 config()
 
@@ -42,6 +43,13 @@ new TemplateStack(app, stackName as string, {
     account: awsAccount
   },
   tags: tags
+})
+
+new IacStack(app, 'UserMssTemplateIacStack', {
+  env: {
+    region: awsRegion,
+    account: awsAccount
+  }
 })
 
 app.synth()
