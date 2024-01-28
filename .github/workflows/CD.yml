@@ -18,7 +18,7 @@ jobs:
             - name: Setup AWS Credentials
               uses: aws-actions/configure-aws-credentials@v3
               with:
-                aws-region: ${{ vars.AWS_REGION }}
+                aws-region: ${{vars.AWS_REGION}}
                 role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/GithubActionsRole
                 role-session-name: github-action
             - name: Use Node.js 18.x
