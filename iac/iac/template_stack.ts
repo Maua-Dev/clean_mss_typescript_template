@@ -47,7 +47,7 @@ export class TemplateStack extends Stack {
     dynamoTable.table.grantReadWriteData(lambdaStack.getAllUsersFunction)
 
 
-    const iacStack = new IacStack(this, 'UserMssTemplateIacStack', {
+    new IacStack(this, 'UserMssTemplateIacStack', {
       env: {
         region: process.env.REGION,
         account: process.env.AWS_ACCOUNT_ID
