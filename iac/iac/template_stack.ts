@@ -3,6 +3,7 @@ import { Cors, RestApi } from 'aws-cdk-lib/aws-apigateway'
 import { Construct } from 'constructs'
 import { TemplateDynamoTable } from './template_dynamo_table'
 import { LambdaStack } from './lambda_stack'
+import { IacStack } from './iac_stack'
 
 export class TemplateStack extends Stack {
   constructor(scope: Construct, constructId: string, props?: StackProps) {
@@ -44,6 +45,14 @@ export class TemplateStack extends Stack {
     dynamoTable.table.grantReadWriteData(lambdaStack.deleteUserFunction)
     dynamoTable.table.grantReadWriteData(lambdaStack.updateUserFunction)
     dynamoTable.table.grantReadWriteData(lambdaStack.getAllUsersFunction)
+
+    const iacStack = new IacStack(this, 'UserMssTemplateIacStack', {
+      env: {
+        region: process.env.REGION,
+        account: process.env.AWS_ACCOUNT_ID
+      }
+    })
+    
 
   }
 }
