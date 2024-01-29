@@ -31,9 +31,9 @@ jobs:
                 echo "STACK_NAME=CleanMssTsTemplate${{ github.ref_name }}" >> $GITHUB_ENV
             - name: Install dependencies
               run: |
-                yarn add vite
-                yarn global add aws-cdk
-                yarn install -g
+                yarn add vite aws-cdk
+                cd iac
+                yarn install --frozen-lockfile         
             - name: Build and Export
               run: |
                 yarn build
