@@ -20,7 +20,7 @@ jobs:
               with:
                 role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/GithubActionsRole
                 role-session-name: github-action
-                aws-region: ${{ vars.REGION }}
+                aws-region: ${{vars.REGION}}
             - name: Use Node.js 18.x
               uses: actions/setup-node@v2
               with:
