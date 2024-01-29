@@ -50,7 +50,7 @@ jobs:
                 echo ALTERNATIVE_DOMAIN_NAME=${{ vars.ALTERNATIVE_DOMAIN_NAME }} >> $GITHUB_ENV
             - name: Deploy with CDK
               run: |
-                cdk iac
+                cd iac
                 cdk synth
                 cdk deploy --require-approval never
             - name: Set CloudFront ID
