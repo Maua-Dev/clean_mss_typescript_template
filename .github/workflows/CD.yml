@@ -38,7 +38,7 @@ jobs:
                 yarn install -g
             - name: Build and Export
               run: |
-                yarn vite build
+                yarn build
             - name: Setup envs
               run: |
                 echo AWS_REGION=sa-east-1 >> $GITHUB_ENV
