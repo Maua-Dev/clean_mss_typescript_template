@@ -33,7 +33,6 @@ jobs:
               run: |
                 yarn add vite
                 yarn global add aws-cdk
-                cd iac
                 yarn install -g
             - name: Build and Export
               run: |
