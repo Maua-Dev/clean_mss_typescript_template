@@ -36,7 +36,8 @@ jobs:
                 yarn install -g
                 cd iac
                 yarn install -g
-                rm -f package-lock.json        
+              env:
+                depsLockFilePath: ./iac/package-lock.json      
             - name: Build and Export
               run: |
                 yarn build
