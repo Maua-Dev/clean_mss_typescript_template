@@ -35,9 +35,7 @@ jobs:
                 yarn global add aws-cdk
                 yarn install -g
                 cd iac
-                yarn install -g
-              env:
-                depsLockFilePath: ./iac/package-lock.json      
+                yarn install --frozen-lockfile            
             - name: Build and Export
               run: |
                 yarn build
