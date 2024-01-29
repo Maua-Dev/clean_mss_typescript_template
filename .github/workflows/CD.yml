@@ -31,11 +31,9 @@ jobs:
                 echo "STACK_NAME=CleanMssTsTemplate${{ github.ref_name }}" >> $GITHUB_ENV
             - name: Install dependencies
               run: |
-                yarn add vite
-                yarn global add aws-cdk
-                yarn install -g
+                yarn add vite aws-cdk
                 cd iac
-                yarn install -g
+                yarn install
             - name: Build and Export
               run: |
                 yarn build
@@ -52,7 +50,7 @@ jobs:
             - name: Deploy with CDK
               run: |
                 cd iac
-                cdk synth
+                cdk synth 
                 cdk deploy --require-approval never
             - name: Set CloudFront ID
               run: |
