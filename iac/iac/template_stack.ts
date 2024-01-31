@@ -30,7 +30,7 @@ export class TemplateStack extends Stack {
 
     const ENVIRONMENT_VARIABLES = {
       'STAGE': process.env.STAGE,
-      'DYNAMO_TABLE_NAME': process.env.DYNAMO_TABLE_NAME,
+      'DYNAMO_TABLE_NAME': dynamoTable.table.tableName,
       'DYNAMO_PARTITION_KEY': 'PK',
       'DYNAMO_SORT_KEY': 'SK',
       'REGION': process.env.REGION,
